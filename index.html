@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Nunito:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <title>Selamat Ulang Tahun</title>
-	<meta name="description" content="met ultah buat temen gw yg cantik">
+	<meta name="description" content="selamat ulang tahun buat cantiku manisku sayangkuu">
     <style>
         html{
             font-family: 'Montserrat', sans-serif;
@@ -945,6 +945,7 @@ bokeh {
   height:350px;
   z-index:-1;
   left:0;
+  font-size: 12px;
   top:0;
   box-shadow: inset 100px 20px 100px rgba(0,0,0,0.2);
 }
@@ -976,6 +977,17 @@ bokeh {
 	flex-direction: column;
 }
 
+.countdown{
+  display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	margin: auto;
+	text-align: center;
+	flex-direction: column;
+}
+
 .cake{
 	background: #ee9ca7;
 }
@@ -988,8 +1000,12 @@ bokeh {
     </style>
 </head>
 <body>
-	<audio src="./(1HOUR) Happy Birthday Song Relaxing Piano Instrumental.mp3" autoplay loop></audio>
-    <canvas id="c"></canvas>
+	<audio src="/(1HOUR) Happy Birthday Song Relaxing Piano Instrumental.mp3" autoplay loop></audio>
+  <div class="countdown">
+    <h2>Sabar ya masih</h2>
+    <h1 class="h1 fw-bold" id="countdown"></h1>
+
+  </div>
     <div class="letter" style="display:none;">
 
 		<bokeh></bokeh>
@@ -1041,20 +1057,21 @@ bokeh {
         <div class="content">
             <div class="type-js headline">
                 
-            <h3 class="text-js">"Ulang tahun adalah merupakan momen yang sangat indah, buat kamu untuk terus bersemangat dan bermanfaat untuk orang banyak. Selamat ulang tahun sahabatku. Sehat selalu dan semoga Allah selalu menyayangimu"</h3>
+            <h3 class="text-js">"Pada hari ini, seorang putri cantik datang ke dunia ini untuk membuat hidupku bahagia. Aku ingin menjalani hidupku bersamamu. Selamat ulang tahun sayang."</h3>
         </div>
 
         </div>
     </div>
-    <div class="cake" style="display:none;">
-		<div class="birthdayCard" style="opacity: 0">
+    <div class="cake" style="display:none">
+		<div class="birthdayCard" style="opacity:0">
 			<div class="cardFront"><h3 class="happy">HAPPY BIRTHDAY!</h3>
-			<img src="./happybdayy-378f4c94-0a75-47cf-a3bb-f6783d5ec339-removebg-preview.png" style="object-fit: contain;width: 100%;" alt="">
+			<img src="/happybdayy-5ffab54e-b3bb-4006-9301-c08ab02d3c10-removebg-preview.png" style="object-fit: contain;width: 100%;" alt="">
 			</div>
 			  <div class="cardInside">
 				<h3 class="back">HAPPY BIRTHDAY!</h3>
-				<p>Selamat Ulang Tahun Nayy,</p>
-				<p style="margin-left: 5px;margin-right:5px;">Semoga sadar kalo hidup ente udah berkurang 1 tahun. Semoga cepetan diangkat penyakitnya biar bisa traktir gw ✌️. udah kali ya, ya wish u all the best pokoknya ❤</p>
+				<p>Selamat ulang tahun sayangg</p>
+				<p style="margin-left: 5px;margin-right:5px;">Semoga selalu diberi kesehatan, dipanjangkan umurnya, diberi kebahagiaan, menjadi lebih baik, tidak lemot hehe. Semoga lulus dengan hasil terbaik, wish u all the best ♥</p>
+        <p>Maaf gak bisa ngasih apa apa.</p>
 			  </div>
 			</div>   
 			
@@ -1091,7 +1108,8 @@ bokeh {
 
     </script>
     <script>
-        var w = c.width = window.innerWidth,
+    function hbd(parms) {
+      var w = c.width = window.innerWidth,
 		h = c.height = window.innerHeight,
 		ctx = c.getContext( '2d' ),
 		
@@ -1493,7 +1511,31 @@ window.addEventListener( 'resize', function(){
 	
 	ctx.font = opts.charSize + 'px Montserrat';
 });
-setTimeout(() => {
+    }
+
+
+        var countDownDate = new Date("Feb 7, 2023 00:00:00").getTime();
+
+var x = setInterval(function() {
+
+  var now = new Date().getTime();
+
+  var distance = countDownDate - now;
+
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  document.getElementById("countdown").innerHTML = hours + " jam "
+  + minutes + " menit " + seconds + " detik lagi ";
+
+  if (distance < 0) {
+    clearInterval(x);
+    $(".countdown").hide();    
+    $(".countdown").after(`<canvas id="c"></canvas>`);
+    hbd();
+    setTimeout(() => {
     $("#c").fadeOut();
     setTimeout(() => {
         $("#c").remove();
@@ -1664,10 +1706,12 @@ setTimeout(() => {
 					$(".birthdayCard").removeAttr("style");
 					$(".cake").append(`<p>*Bisa diklik kartunya</p>`);
 				}, 7000);
-			}, 24000);
+			}, 19000);
         }, 300);
     }, 400);
 }, 11000);
+  }
+}, 1000);
     </script>
 </body>
 </html>
